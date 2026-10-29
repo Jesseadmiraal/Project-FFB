@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f4f1">
+    <title>mybrowser.lol</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E🌐%3C/text%3E%3C/svg%3E">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <section id="login-view" class="view login-view" aria-labelledby="login-heading" hidden>
+        <div class="login-layout">
+          <div class="intro">
+            <a class="wordmark" href="/" aria-label="mybrowser home"><span class="brand-mark">m</span> mybrowser<span class="wordmark-dot">.</span></a>
+            <div class="intro-copy">
+              <span class="eyebrow"><span class="status-dot"></span> YOUR LITTLE CORNER OF THE INTERNET</span>
+              <h1>A browser that<br>feels like <span>yours.</span></h1>
+              <p>One quiet little place to explore the web. Pick up where you left off, and make the tab your own.</p>
+            </div>
+            <div class="intro-foot"><span>✳</span> Made for wandering.</div>
+          </div>
+          <div class="login-side">
+            <div class="login-card">
+              <div class="card-icon">↗</div>
+              <div class="eyebrow card-eyebrow">A PRIVATE PLACE</div>
+              <h2 id="login-heading">Come on in.</h2>
+              <p class="card-description">Enter the password to open your browser.</p>
+              <form id="login-form">
+                <label for="password">Password</label>
+                <div class="password-field">
+                  <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Your password" required>
+                  <button id="toggle-password" class="password-toggle" type="button" aria-label="Show password">Show</button>
+                </div>
+                <p id="login-error" class="error-message" role="alert" hidden></p>
+                <button class="primary-button login-button" type="submit"><span>Unlock browser</span><span aria-hidden="true">→</span></button>
+              </form>
+              <p class="privacy-note"><span aria-hidden="true">◈</span> Your password stays private.</p>
+            </div>
+            <p class="side-caption">A softer way to get around.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="setup-view" class="view setup-view" aria-labelledby="setup-heading" hidden>
+        <div class="setup-shell">
+          <a class="wordmark setup-wordmark" href="/"><span class="brand-mark">m</span> mybrowser<span class="wordmark-dot">.</span></a>
+          <div class="setup-card">
+            <div class="step-label"><span>01</span><span class="step-line"></span><span>MAKE IT YOURS</span></div>
+            <div class="setup-preview">
+              <div class="preview-favicon" id="preview-favicon">🌐</div>
+              <div><span class="preview-overline">YOUR NEW TAB</span><div class="preview-title" id="preview-title">mybrowser.lol</div></div>
+              <span class="preview-close">×</span>
+            </div>
+            <h1 id="setup-heading">First, a little<br><span>personal touch.</span></h1>
+            <p class="setup-description">Give your browser a name and a favicon. You can change them whenever.</p>
+            <form id="setup-form">
+              <label for="browser-title">Your browser's title</label>
+              <input id="browser-title" name="title" type="text" maxlength="32" value="mybrowser.lol" autocomplete="off" required>
+              <label class="icon-label">Pick a favicon</label>
+              <div id="favicon-options" class="favicon-options" role="group" aria-label="Choose a favicon">
+                <button type="button" class="favicon-option selected" data-icon="🌐" aria-label="Globe" aria-pressed="true">🌐</button>
+                <button type="button" class="favicon-option" data-icon="✨" aria-label="Sparkles" aria-pressed="false">✨</button>
+                <button type="button" class="favicon-option" data-icon="🍒" aria-label="Cherries" aria-pressed="false">🍒</button>
+                <button type="button" class="favicon-option" data-icon="🪴" aria-label="Plant" aria-pressed="false">🪴</button>
+                <button type="button" class="favicon-option" data-icon="🌙" aria-label="Moon" aria-pressed="false">🌙</button>
+                <button type="button" class="favicon-option" data-icon="🦋" aria-label="Butterfly" aria-pressed="false">🦋</button>
+              </div>
+              <p id="setup-error" class="error-message" role="alert" hidden></p>
+              <button class="primary-button setup-button" type="submit"><span>That looks like me</span><span aria-hidden="true">→</span></button>
+            </form>
+            <p class="setup-footer"><span>✳</span> You can always change this later.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="browser-view" class="view browser-view" aria-label="Your browser" hidden>
+        <header class="browser-topbar">
+          <a class="browser-brand" href="/" aria-label="mybrowser home"><span class="brand-mark">m</span></a>
+          <div class="tab-strip">
+            <div class="browser-tab">
+              <span id="tab-favicon" class="tab-favicon">🌐</span>
+              <span id="tab-title" class="tab-title">mybrowser.lol</span>
+              <button id="close-tab" class="tab-close" type="button" aria-label="Close tab">×</button>
+            </div>
+            <button id="new-tab" class="new-tab" type="button" aria-label="New tab">+</button>
+          </div>
+          <div class="top-actions">
+            <button id="settings-button" class="icon-button" type="button" aria-label="Change browser title and favicon" title="Personalize">☼</button>
+            <button id="logout-button" class="logout-button" type="button">Lock up <span aria-hidden="true">↗</span></button>
+          </div>
+        </header>
+        <div class="browser-toolbar">
+          <div class="navigation-buttons">
+            <button id="back-button" class="nav-button" type="button" aria-label="Go back" title="Go back">←</button>
+            <button id="forward-button" class="nav-button" type="button" aria-label="Go forward" title="Go forward">→</button>
+            <button id="reload-button" class="nav-button" type="button" aria-label="Reload page" title="Reload">↻</button>
+          </div>
+          <form id="address-form" class="address-form">
+            <span class="address-lock" aria-hidden="true">⌑</span>
+            <input id="address-bar" type="text" inputmode="url" autocomplete="off" spellcheck="false" placeholder="Search or enter a website address" aria-label="Search or enter a website address">
+            <button type="submit" class="address-go" aria-label="Go to address">↵</button>
+          </form>
+          <button id="open-external" class="external-button" type="button" title="Open in a new tab">↗</button>
+        </div>
+        <div class="browser-content">
+          <div id="start-page" class="start-page">
+            <div class="start-content">
+              <span class="start-sparkle">✳</span>
+              <p class="eyebrow start-eyebrow">A FRESH PAGE, A FRESH START</p>
+              <h1>Where to<br><span>today?</span></h1>
+              <p class="start-description">Type a search or web address up above and see where it takes you.</p>
+              <div class="quick-links">
+                <button type="button" class="quick-link" data-url="https://en.wikipedia.org"><span class="quick-icon wiki-icon">W</span><span>Wikipedia</span><span class="quick-arrow">↗</span></button>
+                <button type="button" class="quick-link" data-url="https://www.are.na"><span class="quick-icon arena-icon">a.</span><span>Are.na</span><span class="quick-arrow">↗</span></button>
+                <button type="button" class="quick-link" data-url="https://www.archive.org"><span class="quick-icon web-icon">◎</span><span>Take a wander</span><span class="quick-arrow">↗</span></button>
+              </div>
+              <p class="frame-note">Some sites don't allow themselves to be shown inside another page. If one doesn't load, open it in a new tab with ↗.</p>
+            </div>
+            <div class="start-art" aria-hidden="true"><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div><div class="art-sun">✳</div><div class="art-star star-one">✦</div><div class="art-star star-two">✳</div><div class="art-star star-three">·</div></div>
+          </div>
+          <iframe id="browser-frame" class="browser-frame" title="Web page" referrerpolicy="strict-origin-when-cross-origin" hidden></iframe>
+        </div>
+        <div id="settings-panel" class="settings-backdrop" hidden>
+          <section class="settings-dialog" role="dialog" aria-modal="true" aria-labelledby="settings-heading">
+            <button id="settings-close" class="dialog-close" type="button" aria-label="Close settings">×</button>
+            <div class="eyebrow">A LITTLE REFRESH</div>
+            <h2 id="settings-heading">Make it yours.</h2>
+            <form id="settings-form">
+              <label for="settings-title">Browser title</label>
+              <input id="settings-title" type="text" maxlength="32" required>
+              <label class="icon-label">Favicon</label>
+              <div id="settings-favicon-options" class="favicon-options" role="group" aria-label="Choose a favicon">
+                <button type="button" class="favicon-option" data-icon="🌐" aria-label="Globe">🌐</button>
+                <button type="button" class="favicon-option" data-icon="✨" aria-label="Sparkles">✨</button>
+                <button type="button" class="favicon-option" data-icon="🍒" aria-label="Cherries">🍒</button>
+                <button type="button" class="favicon-option" data-icon="🪴" aria-label="Plant">🪴</button>
+                <button type="button" class="favicon-option" data-icon="🌙" aria-label="Moon">🌙</button>
+                <button type="button" class="favicon-option" data-icon="🦋" aria-label="Butterfly">🦋</button>
+              </div>
+              <p id="settings-error" class="error-message" role="alert" hidden></p>
+              <button class="primary-button setup-button" type="submit"><span>Save changes</span><span aria-hidden="true">→</span></button>
+            </form>
+          </section>
+        </div>
+        <footer class="browser-footer"><span><span class="status-dot"></span> YOUR OWN LITTLE CORNER</span><span>Take your time out there.</span></footer>
+      </section>
+    </main>
+  </body>
+</html>

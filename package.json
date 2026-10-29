@@ -1,0 +1,12 @@
+{
+  "name": "mybrowser",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A password-protected browser-style website",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
