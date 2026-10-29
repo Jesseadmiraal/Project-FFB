@@ -6,6 +6,7 @@ const views = {
 
 const allowedFavicons = ["🌐", "✨", "🍒", "🪴", "🌙", "🦋"];
 const storageKey = "mybrowser.preferences";
+const defaultBrowserTitle = "Project FFB";
 let preferences = null;
 let selectedSetupIcon = "🌐";
 let selectedSettingsIcon = "🌐";
@@ -147,7 +148,7 @@ document.querySelector("#toggle-password").addEventListener("click", (event) => 
 });
 
 document.querySelector("#browser-title").addEventListener("input", (event) => {
-  document.querySelector("#preview-title").textContent = event.currentTarget.value || "mybrowser.lol";
+  document.querySelector("#preview-title").textContent = event.currentTarget.value || defaultBrowserTitle;
 });
 
 document.querySelector("#favicon-options").addEventListener("click", (event) => {

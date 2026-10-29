@@ -1,4 +1,4 @@
-# mybrowser
+# Project FFB
 
 A static, browser-style website designed for GitHub Pages. Visitors see a
 password prompt, choose a title and favicon, then use the search/address bar
