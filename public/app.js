@@ -103,15 +103,9 @@ function navigateTo(value) {
   frame.src = url;
 }
 
-async function requestJson(url, options = {}) {
-  const response = await fetch(url, {
-    ...options,
-    headers: { "Content-Type": "application/json", ...options.headers },
-    credentials: "same-origin",
-  });
-  const result = await response.json();
-  if (!response.ok) throw new Error(result.error || "Something went wrong. Please try again.");
-  return result;
+async function hashPassword(value) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
+  return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
 document.querySelector("#login-form").addEventListener("submit", async (event) => {
@@ -123,15 +117,21 @@ document.querySelector("#login-form").addEventListener("submit", async (event) =
   submitButton.querySelector("span").textContent = "Checking…";
 
   try {
-    await requestJson("/api/login", {
-      method: "POST",
-      body: JSON.stringify({ password: document.querySelector("#password").value }),
-    });
+    if (!window.MYBROWSER_PASSWORD_SHA256) {
+      showError(errorElement, "The site owner needs to configure the demo password hash.");
+      return;
+    }
+    const enteredHash = await hashPassword(document.querySelector("#password").value);
+    if (enteredHash !== window.MYBROWSER_PASSWORD_SHA256.toLowerCase()) {
+      showError(errorElement, "That password doesn't match. Try again.");
+      return;
+    }
     preferences = readPreferences();
     if (preferences) openBrowser();
     else showView("setup");
   } catch (error) {
-    showError(errorElement, error.message);
+    console.error("Could not check the demo password:", error);
+    showError(errorElement, "Password check failed. Please try again.");
   } finally {
     submitButton.disabled = false;
     submitButton.querySelector("span").textContent = "Unlock browser";
@@ -263,31 +263,14 @@ document.querySelector("#close-tab").addEventListener("click", () => {
   document.querySelector("#new-tab").click();
 });
 
-document.querySelector("#logout-button").addEventListener("click", async () => {
-  try {
-    await requestJson("/api/logout", { method: "POST", body: "{}" });
-    document.querySelector("#password").value = "";
-    showView("login");
-  } catch (error) {
-    console.error("Could not lock browser:", error);
-    window.alert(error.message);
-  }
+document.querySelector("#logout-button").addEventListener("click", () => {
+  document.querySelector("#password").value = "";
+  showView("login");
 });
 
-async function initialize() {
-  try {
-    const session = await requestJson("/api/session");
-    if (!session.authenticated) {
-      showView("login");
-      return;
-    }
-    preferences = readPreferences();
-    if (preferences) openBrowser();
-    else showView("setup");
-  } catch (error) {
-    showView("login");
-    showError(document.querySelector("#login-error"), `Couldn't connect to the server. ${error.message}`);
-  }
+function initialize() {
+  preferences = readPreferences();
+  showView("login");
 }
 
 initialize();

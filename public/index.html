@@ -6,15 +6,16 @@
     <meta name="theme-color" content="#f5f4f1">
     <title>mybrowser.lol</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E🌐%3C/text%3E%3C/svg%3E">
-    <link rel="stylesheet" href="/styles.css">
-    <script src="/app.js" defer></script>
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./config.js" defer></script>
+    <script src="./app.js" defer></script>
   </head>
   <body>
     <main>
       <section id="login-view" class="view login-view" aria-labelledby="login-heading" hidden>
         <div class="login-layout">
           <div class="intro">
-            <a class="wordmark" href="/" aria-label="mybrowser home"><span class="brand-mark">m</span> mybrowser<span class="wordmark-dot">.</span></a>
+            <a class="wordmark" href="./" aria-label="mybrowser home"><span class="brand-mark">m</span> mybrowser<span class="wordmark-dot">.</span></a>
             <div class="intro-copy">
               <span class="eyebrow"><span class="status-dot"></span> YOUR LITTLE CORNER OF THE INTERNET</span>
               <h1>A browser that<br>feels like <span>yours.</span></h1>
@@ -37,7 +38,7 @@
                 <p id="login-error" class="error-message" role="alert" hidden></p>
                 <button class="primary-button login-button" type="submit"><span>Unlock browser</span><span aria-hidden="true">→</span></button>
               </form>
-              <p class="privacy-note"><span aria-hidden="true">◈</span> Your password stays private.</p>
+              <p class="privacy-note">Demo gate only — this site isn't private or secure.</p>
             </div>
             <p class="side-caption">A softer way to get around.</p>
           </div>
@@ -46,7 +47,7 @@
 
       <section id="setup-view" class="view setup-view" aria-labelledby="setup-heading" hidden>
         <div class="setup-shell">
-          <a class="wordmark setup-wordmark" href="/"><span class="brand-mark">m</span> mybrowser<span class="wordmark-dot">.</span></a>
+          <a class="wordmark setup-wordmark" href="./"><span class="brand-mark">m</span> mybrowser<span class="wordmark-dot">.</span></a>
           <div class="setup-card">
             <div class="step-label"><span>01</span><span class="step-line"></span><span>MAKE IT YOURS</span></div>
             <div class="setup-preview">
@@ -78,7 +79,7 @@
 
       <section id="browser-view" class="view browser-view" aria-label="Your browser" hidden>
         <header class="browser-topbar">
-          <a class="browser-brand" href="/" aria-label="mybrowser home"><span class="brand-mark">m</span></a>
+          <a class="browser-brand" href="./" aria-label="mybrowser home"><span class="brand-mark">m</span></a>
           <div class="tab-strip">
             <div class="browser-tab">
               <span id="tab-favicon" class="tab-favicon">🌐</span>

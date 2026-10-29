@@ -1,34 +1,50 @@
 # mybrowser
 
-A small, password-protected browser-style website. After unlocking it, visitors
-choose the title and favicon shown in the real browser tab and in the app's tab
-bar, then search or open sites in an embedded web view.
+A static, browser-style website designed for GitHub Pages. Visitors see a
+password prompt, choose a title and favicon, then use the search/address bar
+and embedded web view.
 
-## Run locally
+## Important: demo password only
 
-Requires Node.js 20 or newer. In PowerShell, set the shared password and start
-the server:
+GitHub Pages serves static files and cannot verify passwords on a server. The
+password check in this version runs in the visitor's browser. The password
+hash is shipped with the website, can be inspected or cracked, and the check
+can be bypassed. It does **not** make the site or its contents private. Do not
+use it to protect sensitive information. For actual access control, use a
+server-capable host with server-side authentication or a hosting provider's
+access-control feature.
+
+## Set the demo password
+
+On a computer with Node.js, generate a SHA-256 hash in PowerShell (replace the
+example text with your own password):
 
 ```powershell
-$env:SITE_PASSWORD = "choose-a-long-unique-password"
-node server.js
+node -e "console.log(require('node:crypto').createHash('sha256').update('your-demo-password').digest('hex'))"
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Set `PORT` to use a
-different port. The server refuses to start if `SITE_PASSWORD` is missing or
-shorter than eight characters.
+Copy the printed hash into `public/config.js`, replacing the empty value:
 
-## Deployment notes
+```js
+window.MYBROWSER_PASSWORD_SHA256 = "paste-the-64-character-hash-here";
+```
 
-- Set `SITE_PASSWORD` in the hosting provider's environment settings; do not
-  put the real password in source control.
-- Use HTTPS in production. When `NODE_ENV=production`, the login cookie is
-  marked `Secure`.
-- Sessions are held in server memory and expire after eight hours. Restarting
-  the server signs everyone out; run a single server instance unless you add a
-  shared session store.
-- The title and favicon are saved in each visitor's browser storage, so they
-  are personal to that browser rather than shared site-wide.
-- This is a web page with an embedded frame, not a full browser. Some sites
-  block embedding; use the arrow button beside the address bar to open those
-  sites in a new tab.
+This keeps the literal password out of the JavaScript, but **does not make the
+gate secure**: anyone can inspect the shipped hash and bypass the check. Avoid
+using a password you use anywhere else.
+
+## Publish on GitHub Pages
+
+1. Push this project to a GitHub repository on the `main` branch.
+2. In the repository, open **Settings → Pages** and set the build and
+   deployment source to **GitHub Actions**.
+3. Push a commit (or run **Deploy to GitHub Pages** from the Actions tab).
+   The workflow publishes the `public` folder.
+4. Open the Pages URL shown in the workflow deployment.
+
+The site uses relative asset links, so it works both at a user/org Pages
+domain and at a project URL such as `username.github.io/repository/`.
+
+The chosen title and favicon are saved in that visitor's browser. Some sites
+block being embedded in the web view; use the arrow next to the address bar
+to open those sites in a new tab.
