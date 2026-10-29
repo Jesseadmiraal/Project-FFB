@@ -4,12 +4,12 @@ const views = {
   browser: document.querySelector("#browser-view"),
 };
 
-const allowedFavicons = ["🌐", "✨", "🍒", "🪴", "🌙", "🦋"];
+const allowedFavicons = ["start.png", "favicon1.png", "favicon2.png", "favicon3.png", "favicon4.png", "favicon5.png"];
 const storageKey = "mybrowser.preferences";
 const defaultBrowserTitle = "Project FFB";
 let preferences = null;
-let selectedSetupIcon = "🌐";
-let selectedSettingsIcon = "🌐";
+let selectedSetupIcon = "start.png";
+let selectedSettingsIcon = "start.png";
 let currentUrl = "";
 
 function showView(name) {
@@ -47,13 +47,12 @@ function applyPreferences(nextPreferences) {
   preferences = nextPreferences;
   document.title = preferences.title;
   document.querySelector("#tab-title").textContent = preferences.title;
-  document.querySelector("#tab-favicon").textContent = preferences.icon;
+  document.querySelector("#tab-favicon").src = `./${preferences.icon}`;
   document.querySelector("#preview-title").textContent = preferences.title;
-  document.querySelector("#preview-favicon").textContent = preferences.icon;
+  document.querySelector("#preview-favicon").src = `./${preferences.icon}`;
 
   const favicon = document.querySelector('link[rel="icon"]');
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="88">${preferences.icon}</text></svg>`;
-  favicon.href = `data:image/svg+xml,${encodeURIComponent(svg)}`;
+  favicon.href = `./${preferences.icon}`;
 }
 
 function selectFavicon(container, icon) {
@@ -156,7 +155,7 @@ document.querySelector("#favicon-options").addEventListener("click", (event) => 
   if (!button) return;
   selectedSetupIcon = button.dataset.icon;
   selectFavicon(event.currentTarget, selectedSetupIcon);
-  document.querySelector("#preview-favicon").textContent = selectedSetupIcon;
+  document.querySelector("#preview-favicon").src = `./${selectedSetupIcon}`;
 });
 
 document.querySelector("#setup-form").addEventListener("submit", (event) => {

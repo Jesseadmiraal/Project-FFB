@@ -30,7 +30,7 @@ jobs:
       - name: Prepare website
         run: |
           mkdir _site
-          cp index.html app.js config.js styles.css _site/
+          cp index.html app.js config.js styles.css start.png favicon1.png favicon2.png favicon3.png favicon4.png favicon5.png _site/
 
       - name: Upload website
         uses: actions/upload-pages-artifact@v3

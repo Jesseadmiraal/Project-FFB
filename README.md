@@ -52,6 +52,7 @@ now at the root, it will be used as the homepage.
 The site uses relative asset links, so it works both at a user/org Pages
 domain and at a project URL such as `username.github.io/repository/`.
 
-The chosen title and favicon are saved in that visitor's browser. Some sites
-block being embedded in the web view; use the arrow next to the address bar
-to open those sites in a new tab.
+The chosen title and favicon are saved in that visitor's browser. Favicon
+choices use `start.png` and `favicon1.png` through `favicon5.png` from the
+repository root. Some sites block being embedded in the web view; use the
+arrow next to the address bar to open those sites in a new tab.
