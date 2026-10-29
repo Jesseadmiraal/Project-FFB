@@ -23,7 +23,7 @@ example text with your own password):
 node -e "console.log(require('node:crypto').createHash('sha256').update('your-demo-password').digest('hex'))"
 ```
 
-Copy the printed hash into `public/config.js`, replacing the empty value:
+Copy the printed hash into `config.js`, replacing the empty value:
 
 ```js
 window.MYBROWSER_PASSWORD_SHA256 = "paste-the-64-character-hash-here";
@@ -35,12 +35,19 @@ using a password you use anywhere else.
 
 ## Publish on GitHub Pages
 
+The website's `index.html` and assets are in the repository root, so GitHub
+Pages can use them as the homepage rather than displaying this README.
+
 1. Push this project to a GitHub repository on the `main` branch.
 2. In the repository, open **Settings → Pages** and set the build and
    deployment source to **GitHub Actions**.
 3. Push a commit (or run **Deploy to GitHub Pages** from the Actions tab).
-   The workflow publishes the `public` folder.
+   The workflow stages the site files and deploys them.
 4. Open the Pages URL shown in the workflow deployment.
+
+Alternatively, to publish directly from a branch, select the `main` branch
+and the `/ (root)` folder under **Settings → Pages**. Since `index.html` is
+now at the root, it will be used as the homepage.
 
 The site uses relative asset links, so it works both at a user/org Pages
 domain and at a project URL such as `username.github.io/repository/`.

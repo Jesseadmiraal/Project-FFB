@@ -1,1 +1,0 @@
-window.MYBROWSER_PASSWORD_SHA256 = "";
